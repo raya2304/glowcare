@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowCare | Skincare Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .product-card {
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .category-btn.active {
+            background-color: #5b4636;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-[#faf7f2] text-[#3f3027]">
+
+    <!-- NAVBAR -->
+    <nav class="bg-[#f4ede4] border-b border-[#e2d5c7] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+
+            <a href="#" class="text-2xl font-bold tracking-wide">
+                Glow<span class="text-[#9a7657]">Care</span>
+            </a>
+
+            <div class="hidden md:flex gap-7 text-sm font-medium">
+                <a href="#home" class="hover:text-[#9a7657]">Home</a>
+                <a href="#products" class="hover:text-[#9a7657]">Products</a>
+                <a href="#routine" class="hover:text-[#9a7657]">Routine</a>
+                <a href="#reviews" class="hover:text-[#9a7657]">Reviews</a>
+                <a href="#contact" class="hover:text-[#9a7657]">Contact</a>
+            </div>
+
+            <button onclick="openBag()" class="relative bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                Bag
+                <span id="bagCount"
+                    class="absolute -top-2 -right-2 bg-[#c59d7b] text-white w-5 h-5 rounded-full text-xs flex items-center justify-center">
+                    0
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="max-w-7xl mx-auto px-5 py-16">
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+
+            <div>
+                <p class="uppercase tracking-[4px] text-sm text-[#9a7657] mb-4">
+                    Simple skincare
+                </p>
+
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                    Let your natural
+                    <span class="text-[#9a7657]">glow</span> speak.
+                </h1>
+
+                <p class="text-[#75665c] text-lg leading-8 mb-8 max-w-lg">
+                    Gentle skincare essentials made for everyday routines.
+                    Clean formulas, simple steps and a little self-care.
+                </p>
+
+                <div class="flex gap-4">
+                    <a href="#products"
+                        class="bg-[#5b4636] text-white px-7 py-3 rounded-full hover:bg-[#46352a]">
+                        Shop Now
+                    </a>
+
+                    <a href="#routine"
+                        class="border border-[#8f7663] px-7 py-3 rounded-full hover:bg-[#eee4da]">
+                        View Routine
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-[#e9ded2] rounded-[40px] p-8">
+                <div class="bg-[#d5c1ae] rounded-[30px] h-[400px] flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-8xl mb-5">🧴</div>
+                        <h2 class="text-3xl font-bold">Glow Collection</h2>
+                        <p class="mt-2 text-[#665348]">
+                            Care • Nourish • Glow
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="bg-[#eee5dc] py-12">
+        <div class="max-w-7xl mx-auto px-5">
+
+            <div class="text-center mb-8">
+                <p class="text-[#9a7657] uppercase tracking-widest text-sm">
+                    Explore
+                </p>
+                <h2 class="text-3xl font-bold mt-2">Shop by Category</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+
+                <button onclick="filterProducts('cleanser')"
+                    class="bg-[#faf7f2] p-7 rounded-2xl hover:shadow-md">
+                    <div class="text-4xl mb-3">🫧</div>
+                    <h3 class="font-bold">Cleansers</h3>
+                    <p class="text-sm text-gray-500 mt-1">Fresh & gentle</p>
+                </button>
+
+                <button onclick="filterProducts('serum')"
+                    class="bg-[#faf7f2] p-7 rounded-2xl hover:shadow-md">
+                    <div class="text-4xl mb-3">💧</div>
+                    <h3 class="font-bold">Serums</h3>
+                    <p class="text-sm text-gray-500 mt-1">Targeted care</p>
+                </button>
+
+                <button onclick="filterProducts('moisturizer')"
+                    class="bg-[#faf7f2] p-7 rounded-2xl hover:shadow-md">
+                    <div class="text-4xl mb-3">🌿</div>
+                    <h3 class="font-bold">Moisturizers</h3>
+                    <p class="text-sm text-gray-500 mt-1">Deep hydration</p>
+                </button>
+
+                <button onclick="filterProducts('sunscreen')"
+                    class="bg-[#faf7f2] p-7 rounded-2xl hover:shadow-md">
+                    <div class="text-4xl mb-3">☀️</div>
+                    <h3 class="font-bold">Sunscreen</h3>
+                    <p class="text-sm text-gray-500 mt-1">Daily protection</p>
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products" class="max-w-7xl mx-auto px-5 py-16">
+
+        <div class="flex flex-col md:flex-row justify-between gap-5 mb-10">
+
+            <div>
+                <p class="text-[#9a7657] uppercase tracking-widest text-sm">
+                    Our collection
+                </p>
+                <h2 class="text-3xl font-bold mt-2">Everyday Essentials</h2>
+            </div>
+
+            <div class="flex gap-2 flex-wrap">
+
+                <button onclick="filterProducts('all')"
+                    class="category-btn active px-4 py-2 rounded-full border border-[#bca999] text-sm">
+                    All
+                </button>
+
+                <button onclick="filterProducts('cleanser')"
+                    class="category-btn px-4 py-2 rounded-full border border-[#bca999] text-sm">
+                    Cleansers
+                </button>
+
+                <button onclick="filterProducts('serum')"
+                    class="category-btn px-4 py-2 rounded-full border border-[#bca999] text-sm">
+                    Serums
+                </button>
+
+                <button onclick="filterProducts('moisturizer')"
+                    class="category-btn px-4 py-2 rounded-full border border-[#bca999] text-sm">
+                    Moisturizers
+                </button>
+
+                <button onclick="filterProducts('sunscreen')"
+                    class="category-btn px-4 py-2 rounded-full border border-[#bca999] text-sm">
+                    Sunscreen
+                </button>
+
+            </div>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="mb-8">
+            <input
+                id="searchInput"
+                onkeyup="searchProducts()"
+                type="text"
+                placeholder="Search skincare products..."
+                class="w-full md:w-96 px-5 py-3 rounded-full border border-[#d5c5b7] bg-white outline-none focus:border-[#8f7663]"
+            >
+        </div>
+
+        <!-- PRODUCT GRID -->
+        <div id="productGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- Product 1 -->
+            <div class="product-card product" data-category="cleanser" data-name="Oat Milk Cleanser">
+                <div class="bg-[#e9ded2] rounded-3xl p-8 text-center">
+                    <div class="text-7xl">🫧</div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs uppercase tracking-widest text-[#9a7657]">Cleanser</p>
+                    <h3 class="font-bold text-lg mt-1">Oat Milk Cleanser</h3>
+                    <p class="text-sm text-gray-500 mt-2">Gentle daily face wash</p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="font-bold">₹499</span>
+                        <button onclick="addToBag('Oat Milk Cleanser')"
+                            class="bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card product" data-category="serum" data-name="Vitamin C Serum">
+                <div class="bg-[#eadcc9] rounded-3xl p-8 text-center">
+                    <div class="text-7xl">💧</div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs uppercase tracking-widest text-[#9a7657]">Serum</p>
+                    <h3 class="font-bold text-lg mt-1">Vitamin C Serum</h3>
+                    <p class="text-sm text-gray-500 mt-2">Brightening daily serum</p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="font-bold">₹699</span>
+                        <button onclick="addToBag('Vitamin C Serum')"
+                            class="bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card product" data-category="moisturizer" data-name="Daily Dew Cream">
+                <div class="bg-[#ded3c9] rounded-3xl p-8 text-center">
+                    <div class="text-7xl">🌿</div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs uppercase tracking-widest text-[#9a7657]">Moisturizer</p>
+                    <h3 class="font-bold text-lg mt-1">Daily Dew Cream</h3>
+                    <p class="text-sm text-gray-500 mt-2">Lightweight skin hydration</p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="font-bold">₹599</span>
+                        <button onclick="addToBag('Daily Dew Cream')"
+                            class="bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card product" data-category="sunscreen" data-name="Daily Shield SPF 50">
+                <div class="bg-[#e6d8c7] rounded-3xl p-8 text-center">
+                    <div class="text-7xl">☀️</div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs uppercase tracking-widest text-[#9a7657]">Sunscreen</p>
+                    <h3 class="font-bold text-lg mt-1">Daily Shield SPF 50</h3>
+                    <p class="text-sm text-gray-500 mt-2">Lightweight daily protection</p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="font-bold">₹749</span>
+                        <button onclick="addToBag('Daily Shield SPF 50')"
+                            class="bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card product" data-category="cleanser" data-name="Rose Foam Wash">
+                <div class="bg-[#eadbd5] rounded-3xl p-8 text-center">
+                    <div class="text-7xl">🌹</div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs uppercase tracking-widest text-[#9a7657]">Cleanser</p>
+                    <h3 class="font-bold text-lg mt-1">Rose Foam Wash</h3>
+                    <p class="text-sm text-gray-500 mt-2">Soft refreshing cleanser</p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="font-bold">₹449</span>
+                        <button onclick="addToBag('Rose Foam Wash')"
+                            class="bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card product" data-category="serum" data-name="Hyaluronic Drops">
+                <div class="bg-[#d8e0df] rounded-3xl p-8 text-center">
+                    <div class="text-7xl">💦</div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs uppercase tracking-widest text-[#9a7657]">Serum</p>
+                    <h3 class="font-bold text-lg mt-1">Hyaluronic Drops</h3>
+                    <p class="text-sm text-gray-500 mt-2">Deep moisture boost</p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="font-bold">₹799</span>
+                        <button onclick="addToBag('Hyaluronic Drops')"
+                            class="bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card product" data-category="moisturizer" data-name="Cloud Soft Cream">
+                <div class="bg-[#e3ddd7] rounded-3xl p-8 text-center">
+                    <div class="text-7xl">☁️</div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs uppercase tracking-widest text-[#9a7657]">Moisturizer</p>
+                    <h3 class="font-bold text-lg mt-1">Cloud Soft Cream</h3>
+                    <p class="text-sm text-gray-500 mt-2">Silky everyday moisturizer</p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="font-bold">₹649</span>
+                        <button onclick="addToBag('Cloud Soft Cream')"
+                            class="bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card product" data-category="sunscreen" data-name="Invisible Sun Gel">
+                <div class="bg-[#e8dfc9] rounded-3xl p-8 text-center">
+                    <div class="text-7xl">🌞</div>
+                </div>
+
+                <div class="pt-4">
+                    <p class="text-xs uppercase tracking-widest text-[#9a7657]">Sunscreen</p>
+                    <h3 class="font-bold text-lg mt-1">Invisible Sun Gel</h3>
+                    <p class="text-sm text-gray-500 mt-2">Non-sticky sun protection</p>
+
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="font-bold">₹699</span>
+                        <button onclick="addToBag('Invisible Sun Gel')"
+                            class="bg-[#5b4636] text-white px-4 py-2 rounded-full text-sm">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ROUTINE -->
+    <section id="routine" class="bg-[#e9ded2] py-16">
+
+        <div class="max-w-7xl mx-auto px-5">
+
+            <div class="text-center mb-12">
+                <p class="text-[#9a7657] uppercase tracking-widest text-sm">
+                    Keep it simple
+                </p>
+
+                <h2 class="text-3xl font-bold mt-2">
+                    Your 4-Step Routine
+                </h2>
+
+                <p class="text-gray-600 mt-3">
+                    A simple routine for everyday skincare.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+
+                <div class="bg-[#faf7f2] p-7 rounded-3xl">
+                    <span class="text-4xl">01</span>
+                    <h3 class="font-bold text-xl mt-5">Cleanse</h3>
+                    <p class="text-sm text-gray-500 mt-3">
+                        Remove dirt and excess oil with a gentle cleanser.
+                    </p>
+                </div>
+
+                <div class="bg-[#faf7f2] p-7 rounded-3xl">
+                    <span class="text-4xl">02</span>
+                    <h3 class="font-bold text-xl mt-5">Treat</h3>
+                    <p class="text-sm text-gray-500 mt-3">
+                        Apply a serum according to your skincare needs.
+                    </p>
+                </div>
+
+                <div class="bg-[#faf7f2] p-7 rounded-3xl">
+                    <span class="text-4xl">03</span>
+                    <h3 class="font-bold text-xl mt-5">Moisturize</h3>
+                    <p class="text-sm text-gray-500 mt-3">
+                        Lock in hydration with a comfortable moisturizer.
+                    </p>
+                </div>
+
+                <div class="bg-[#faf7f2] p-7 rounded-3xl">
+                    <span class="text-4xl">04</span>
+                    <h3 class="font-bold text-xl mt-5">Protect</h3>
+                    <p class="text-sm text-gray-500 mt-3">
+                        Finish your morning routine with sunscreen.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY GLOWCARE -->
+    <section class="max-w-7xl mx-auto px-5 py-16">
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+
+            <div>
+                <p class="text-[#9a7657] uppercase tracking-widest text-sm">
+                    Why GlowCare
+                </p>
+
+                <h2 class="text-4xl font-bold mt-3 leading-tight">
+                    Skincare doesn't have to be complicated.
+                </h2>
+
+                <p class="text-gray-600 mt-5 leading-7">
+                    We believe everyday skincare should be simple,
+                    comfortable and easy to understand. Choose a few
+                    essentials and build a routine that works for you.
+                </p>
+
+                <div class="mt-8 space-y-5">
+
+                    <div class="flex gap-4">
+                        <div class="bg-[#e9ded2] w-11 h-11 rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Simple routines</h3>
+                            <p class="text-sm text-gray-500">
+                                Easy products for everyday care.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="bg-[#e9ded2] w-11 h-11 rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Thoughtful formulas</h3>
+                            <p class="text-sm text-gray-500">
+                                Carefully selected skincare essentials.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="bg-[#e9ded2] w-11 h-11 rounded-full flex items-center justify-center">
+                            ✓
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Everyday comfort</h3>
+                            <p class="text-sm text-gray-500">
+                                Products designed for simple routines.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="bg-[#f0e5da] rounded-[40px] p-10 text-center">
+                <div class="text-9xl">🌸</div>
+                <h3 class="text-2xl font-bold mt-5">
+                    Take time for yourself.
+                </h3>
+                <p class="text-gray-600 mt-3">
+                    Small skincare rituals can become beautiful moments
+                    of self-care.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="bg-[#eee5dc] py-16">
+
+        <div class="max-w-7xl mx-auto px-5">
+
+            <div class="text-center mb-10">
+                <p class="text-[#9a7657] uppercase tracking-widest text-sm">
+                    Customer love
+                </p>
+                <h2 class="text-3xl font-bold mt-2">What people say</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+
+                <div class="bg-[#faf7f2] p-7 rounded-3xl">
+                    <div class="text-[#9a7657]">★★★★★</div>
+                    <p class="mt-4 text-gray-600 leading-7">
+                        “The website is so simple to use and I love the
+                        clean skincare collection.”
+                    </p>
+                    <p class="font-bold mt-5">— Ananya</p>
+                </div>
+
+                <div class="bg-[#faf7f2] p-7 rounded-3xl">
+                    <div class="text-[#9a7657]">★★★★★</div>
+                    <p class="mt-4 text-gray-600 leading-7">
+                        “I found everything I needed for a basic morning
+                        skincare routine.”
+                    </p>
+                    <p class="font-bold mt-5">— Meera</p>
+                </div>
+
+                <div class="bg-[#faf7f2] p-7 rounded-3xl">
+                    <div class="text-[#9a7657]">★★★★★</div>
+                    <p class="mt-4 text-gray-600 leading-7">
+                        “The products are easy to browse and the design
+                        feels calm and elegant.”
+                    </p>
+                    <p class="font-bold mt-5">— Sarah</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="max-w-5xl mx-auto px-5 py-16">
+
+        <div class="bg-[#5b4636] text-white rounded-[35px] p-10 md:p-14 text-center">
+
+            <p class="uppercase tracking-widest text-sm text-[#dcc5b1]">
+                Stay glowing
+            </p>
+
+            <h2 class="text-3xl md:text-4xl font-bold mt-3">
+                Get skincare tips & offers
+            </h2>
+
+            <p class="text-[#dfd1c7] mt-3">
+                Join our newsletter for simple skincare ideas and new arrivals.
+            </p>
+
+            <div class="flex flex-col sm:flex-row max-w-lg mx-auto mt-7 gap-3">
+
+                <input id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    class="flex-1 px-5 py-3 rounded-full text-[#3f3027] outline-none">
+
+                <button onclick="subscribe()"
+                    class="bg-[#d4b79c] text-[#3f3027] px-6 py-3 rounded-full font-semibold">
+                    Subscribe
+                </button>
+
+            </div>
+
+            <p id="subscribeMessage" class="mt-4 text-sm"></p>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-[#3f3027] text-white">
+
+        <div class="max-w-7xl mx-auto px-5 py-12">
+
+            <div class="grid md:grid-cols-4 gap-10">
+
+                <div>
+                    <h2 class="text-2xl font-bold">
+                        Glow<span class="text-[#c9a889]">Care</span>
+                    </h2>
+
+                    <p class="text-gray-300 text-sm leading-6 mt-4">
+                        Simple skincare essentials for everyday glow.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-4">Shop</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>Cleansers</li>
+                        <li>Serums</li>
+                        <li>Moisturizers</li>
+                        <li>Sunscreen</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-4">Help</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>Shipping</li>
+                        <li>Returns</li>
+                        <li>FAQs</li>
+                        <li>Contact Us</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-bold mb-4">Follow</h3>
+                    <div class="flex gap-3">
+                        <span class="bg-[#59473b] px-3 py-2 rounded-full">IG</span>
+                        <span class="bg-[#59473b] px-3 py-2 rounded-full">FB</span>
+                        <span class="bg-[#59473b] px-3 py-2 rounded-full">X</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-[#5b4b42] mt-10 pt-6 text-center text-sm text-gray-400">
+                © 2026 GlowCare. All rights reserved.
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- BAG MODAL -->
+    <div id="bagModal"
+        class="hidden fixed inset-0 bg-black/50 z-[100] items-center justify-center px-5">
+
+        <div class="bg-[#faf7f2] rounded-3xl p-8 max-w-md w-full">
+
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-bold">Your Bag</h2>
+
+                <button onclick="closeBag()" class="text-2xl">
+                    ×
+                </button>
+            </div>
+
+            <div id="bagItems" class="mt-6 space-y-3">
+                <p class="text-gray-500">Your bag is empty.</p>
+            </div>
+
+            <button onclick="closeBag()"
+                class="w-full bg-[#5b4636] text-white py-3 rounded-full mt-6">
+                Continue Shopping
+            </button>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        let bag = [];
+
+        function addToBag(productName) {
+
+            bag.push(productName);
+
+            document.getElementById("bagCount").textContent = bag.length;
+
+            alert(productName + " added to your bag!");
+        }
+
+        function openBag() {
+
+            const modal = document.getElementById("bagModal");
+            const bagItems = document.getElementById("bagItems");
+
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+
+            if (bag.length === 0) {
+
+                bagItems.innerHTML =
+                    `<p class="text-gray-500">Your bag is empty.</p>`;
+
+                return;
+            }
+
+            bagItems.innerHTML = bag.map((item, index) => `
+                <div class="flex justify-between items-center bg-[#eee5dc] px-4 py-3 rounded-xl">
+                    <span>${index + 1}. ${item}</span>
+                    <button onclick="removeFromBag(${index})"
+                        class="text-red-700 text-sm">
+                        Remove
+                    </button>
+                </div>
+            `).join("");
+        }
+
+        function closeBag() {
+
+            const modal = document.getElementById("bagModal");
+
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        function removeFromBag(index) {
+
+            bag.splice(index, 1);
+
+            document.getElementById("bagCount").textContent = bag.length;
+
+            openBag();
+        }
+
+        function filterProducts(category) {
+
+            const products = document.querySelectorAll(".product");
+            const buttons = document.querySelectorAll(".category-btn");
+
+            buttons.forEach(button => {
+                button.classList.remove("active");
+            });
+
+            products.forEach(product => {
+
+                if (category === "all" ||
+                    product.dataset.category === category) {
+
+                    product.style.display = "block";
+
+                } else {
+
+                    product.style.display = "none";
+                }
+            });
+        }
+
+        function searchProducts() {
+
+            const search =
+                document.getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+            const products = document.querySelectorAll(".product");
+
+            products.forEach(product => {
+
+                const name =
+                    product.dataset.name.toLowerCase();
+
+                if (name.includes(search)) {
+
+                    product.style.display = "block";
+
+                } else {
+
+                    product.style.display = "none";
+                }
+            });
+        }
+
+        function subscribe() {
+
+            const email =
+                document.getElementById("email").value;
+
+            const message =
+                document.getElementById("subscribeMessage");
+
+            if (email === "") {
+
+                message.textContent =
+                    "Please enter your email address.";
+
+                return;
+            }
+
+            message.textContent =
+                "Thank you for subscribing to GlowCare!";
+
+            document.getElementById("email").value = "";
+        }
+
+    </script>
+
+</body>
+</html>
